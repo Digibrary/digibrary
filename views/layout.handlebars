@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{title}}</title>
+  <link rel="stylesheet" type="text/css" href="/css/main.min.css" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+  <link rel="manifest" href="/icon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Digibrary</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="{{#ifCond current_functionality '==' '/'}}active{{/ifCond}}"><a href="/">Home</a></li>
+        <li class="{{#ifCond current_functionality '==' '/user'}}active{{/ifCond}}"><a href="/user/">User</a></li>
+        <li class="{{#ifCond current_functionality '==' '/library'}}active{{/ifCond}}"><a href="/library/">Library</a></li>
+        <li class="{{#ifCond current_functionality '==' '/admin'}}active{{/ifCond}}"><a href="/">Admin</a></li>
+      </ul>
+      {{#if session.user_login}}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Hello, {{session.user_login}}</a></li>
+        <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+      {{else}}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      {{/if}}
+      
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      {{#switch current_functionality}} 
+            {{#case '/'}} 
+              {{!-- <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p> --}}
+            {{/case}} 
+            {{#case '/user'}}
+              <p><a href="/user/">User page</a></p>
+              <p><a href="/user/changepassword">Change password</a></p>
+              {{!-- <p><a href="/user/">Link</a></p> --}}
+            {{/case}} 
+            {{#case '/admin'}} 
+              {{!-- <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p> --}}
+            {{/case}} 
+            {{#case '/library'}} 
+              {{!-- <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p> --}}
+            {{/case}} 
+            {{#default '188'}} 
+              {{!-- <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p> --}}
+            {{/default}}
+      {{/switch}}
+      
+    </div>
+    <div class="col-sm-10 text-left" style="padding-top: 15px; padding-bottom: 15px;"> 
+      {{{body}}}
+    </div>
+   
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Copyrights Digibrary @ Github</p>
+</footer>
+<script>
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+  {{#each notifications}}
+    toastr["{{type}}"]("{{value}}", "{{title}}")
+  {{/each}}
+</script>
+</body>
+</html>
