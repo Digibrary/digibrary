@@ -131,3 +131,7 @@ dist
 
 # db file
 library.db
+
+#notes file
+notes
+notes.txt
