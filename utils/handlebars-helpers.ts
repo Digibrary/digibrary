@@ -1,21 +1,21 @@
 module.exports = {
-    switch: function(value, options) {
+    switch: function(value: any, options: { fn: (arg0: any) => any; }) {
         this.switch_value = value;
         this.switch_break = false;
         return options.fn(this);
     },
-    case: function(value, options) {
+    case: function(value: any, options: { fn: (arg0: any) => any; }) {
         if (value == this.switch_value) {
             this.switch_break = true;
             return options.fn(this);
         }
     },
-    default: function(value, options) {
+    default: function(value: any, options: any) {
         if (this.switch_break == false) {
             return value;
         }
     },
-    ifCond: function (v1, operator, v2, options) {
+    ifCond: function (v1: number, operator: any, v2: number, options: { fn: (arg0: any) => any; inverse: (arg0: any) => any; }) {
 
         switch (operator) {
             case '==':
