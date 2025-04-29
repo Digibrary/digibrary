@@ -2,30 +2,6 @@ services:
   app:
     build: .
     container_name: digibrary_app
-    depends_on:
-      - db
     ports:
       - "3000:3000"
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: digilib_user
-      DB_PASSWORD: digilib_pass
-      DB_NAME: digilib_db
-    volumes:
-      - .:/app
     restart: unless-stopped
-
-  db:
-    image: postgres:15
-    container_name: digibrary_db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: digilib_user
-      POSTGRES_PASSWORD: digilib_pass
-      POSTGRES_DB: digilib_db
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-volumes:
-  pgdata:
