@@ -13,7 +13,7 @@ export function authenticate(req: express.Request, res: express.Response): boole
     user_login = user_login.toLowerCase().trim();
     var result: User;
     try {
-        result = db.prepare("SELECT id, user_login, password_or_hash FROM users WHERE user_login=?").get(user_login);
+        result = db.prepare("SELECT id, user_login, password_or_hash FROM users WHERE user_login=?").get(user_login) as User;
     } catch (e: any) {
         throw new Error("Server Error");
     }
@@ -76,7 +76,7 @@ export function authenticate_plain(req: express.Request, res: express.Response):
     
     var result: User|undefined;
     try {
-        result = db.prepare(`SELECT id, user_login, password_or_hash FROM users WHERE user_login="${user_login}" AND password_or_hash="${password}"`).get();
+        result = db.prepare(`SELECT id, user_login, password_or_hash FROM users WHERE user_login="${user_login}" AND password_or_hash="${password}"`).get() as User;
     } catch (e: any) {
         console.log(e)
     }
@@ -127,7 +127,7 @@ export function verifyPassword(user_login: string, password: string): boolean {
     user_login = user_login.toLowerCase().trim();
     var result: User;
     try {
-        result = db.prepare("SELECT password_or_hash FROM users WHERE user_login=?").get(user_login);
+        result = db.prepare("SELECT password_or_hash FROM users WHERE user_login=?").get(user_login) as User;
     } catch (e: any) {
         throw new Error("Server Error");
     }
@@ -174,7 +174,7 @@ export function issueResetToken(user_login:string){
 }
 
 export function resetPassword(req: express.Request, token:string, newPassword:string):boolean{
-    var user:User|undefined = db.prepare("SELECT * FROM users WHERE recover_token=? AND recover_token_valid_timestamp > ?").get(token, new Date().getTime());
+    var user:User|undefined = db.prepare("SELECT * FROM users WHERE recover_token=? AND recover_token_valid_timestamp > ?").get(token, new Date().getTime()) as User;
     if(user == undefined){
         addMessage(req, {
             type: NotificationType.ERROR,

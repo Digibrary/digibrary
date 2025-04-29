@@ -42,22 +42,22 @@ class User {
     }
 
     static getById(id: number): User | undefined { 
-        var user = db.prepare("SELECT * FROM users WHERE id=?").get(id)
+        var user = db.prepare("SELECT * FROM users WHERE id=?").get(id) as User | undefined
         return user
     }
 
     static getByUsername(user_login: string): User | undefined { 
-        var user = db.prepare("SELECT * FROM users WHERE user_login=?").get(user_login);
+        var user = db.prepare("SELECT * FROM users WHERE user_login=?").get(user_login) as User | undefined
         return user;
     }
 
     static getByEmail(email: string): User | undefined { 
-        var user = db.prepare("SELECT * FROM users WHERE email=?").get(email);
+        var user = db.prepare("SELECT * FROM users WHERE email=?").get(email) as User | undefined
         return user;
     }
 
     static getAll(): User[] {
-        var users = db.prepare("SELECT * FROM users").all();
+        var users = db.prepare("SELECT * FROM users").all() as User[] 
         return users;
     }
 }
