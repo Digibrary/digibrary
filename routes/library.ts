@@ -38,7 +38,7 @@ router.get('/search', async function(req:express.Request, res: express.Response,
     
     const cmds = [
         'bookcut details -b "'+title+'"',
-        '/usr/utils/google-books-cli/bin/books-cli search --keyword "'+title+'"',ﾠ
+        'books-cli search --keyword "'+title+'"',ﾠ
     ];
     
     var result = ""
@@ -47,7 +47,7 @@ router.get('/search', async function(req:express.Request, res: express.Response,
             var {stdout, stderr} = await exec(cmd, {timeout: 15000 })
             result += stdout+stderr
         }catch(e){
-            
+            console.log(e)
         }
     }
     res.render('library/search', { title: 'Search for books', result: result});
