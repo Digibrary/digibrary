@@ -11,6 +11,9 @@ COPY --chown=appuser:appuser package*.json ./
 # Set correct ownership of the app directory (before install)
 RUN chown -R appuser:appuser /app
 
+#simulate scripts
+RUN chmod +x scripts/* && cp scripts/* /bin/
+
 # Install dependencies
 USER appuser
 RUN npm install
@@ -25,7 +28,7 @@ RUN npm run build
 RUN cp preparedb.sql dist/
 RUN cp utils/*.txt dist/utils/
 RUN cp -r views/ dist/
-RUN chmod +x scripts/* && cp scripts/* /bin/
+
 
 # Use non-root user
 USER appuser
