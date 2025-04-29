@@ -304,7 +304,7 @@ router.post('/changepassword', csrfProtect, function (req: express.Request, res:
 /**
  * Check if the session belongs to an admin
  */
-router.all('*splat', utilRoutes.is_admin)
+router.all('/{*splat}', utilRoutes.is_admin)
 
 router.get('/manage', function (req: express.Request, res: express.Response, next: express.NextFunction) {
     var listUsers: User[] = User.getAll();

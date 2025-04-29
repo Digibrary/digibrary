@@ -19,7 +19,7 @@ router.get('/', function(req:express.Request, res: express.Response, next: expre
 /**
  * Check if the session belongs to an admin, running commands on a server is dangerous after all.
  */
-router.all('*splat', utilRoutes.is_admin)
+router.all('/{*splat}', utilRoutes.is_admin)
 
 router.get('/search', async function(req:express.Request, res: express.Response, next: express.NextFunction) {
     var { title,ﾠ} = req.query;
