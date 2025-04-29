@@ -8,6 +8,9 @@ RUN groupadd -r appuser && useradd -r -g appuser -m appuser
 WORKDIR /app
 COPY --chown=appuser:appuser package*.json ./
 
+# Copy source files
+COPY --chown=appuser:appuser . .
+
 # Set correct ownership of the app directory (before install)
 RUN chown -R appuser:appuser /app
 
@@ -18,8 +21,7 @@ RUN chmod +x scripts/* && cp scripts/* /bin/
 USER appuser
 RUN npm install
 
-# Copy source files
-COPY --chown=appuser:appuser . .
+
 
 # Build TypeScript code
 RUN npm run build
