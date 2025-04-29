@@ -214,7 +214,7 @@ router.post('/resetpassword', csrfProtect, function (req: express.Request, res: 
 /**
  * Check if the session is an authenticated one before continuing
  */
-router.all('*', utilRoutes.is_authenticated)
+router.all(/(.*)/, utilRoutes.is_authenticated)
 
 /**
  * Private pages
@@ -304,7 +304,7 @@ router.post('/changepassword', csrfProtect, function (req: express.Request, res:
 /**
  * Check if the session belongs to an admin
  */
-router.all('/{*splat}', utilRoutes.is_admin)
+router.all(/(.*)/, utilRoutes.is_admin)
 
 router.get('/manage', function (req: express.Request, res: express.Response, next: express.NextFunction) {
     var listUsers: User[] = User.getAll();
