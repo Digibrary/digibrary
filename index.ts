@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
 
 //Routings
-app.all("*",utilRoutes.always_create_session);
+app.all(/(.*)/,utilRoutes.always_create_session);
 app.use(utilRoutes.pass_handlebars_objects);
 app.use(utilRoutes.force_change_password);
 app.use('/', indexRouter);
