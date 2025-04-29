@@ -8,6 +8,9 @@ RUN groupadd -r appuser && useradd -r -g appuser -m appuser
 WORKDIR /app
 COPY --chown=appuser:appuser package*.json ./
 
+# Set correct ownership of the app directory (before install)
+RUN chown -R appuser:appuser /app
+
 # Install dependencies
 USER appuser
 RUN npm install
