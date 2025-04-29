@@ -14,6 +14,9 @@ COPY . .
 # Build TypeScript code
 RUN npm run build
 
+RUN cp preparedb.sql dist/
+RUN cp utils/*.txt dist/utils/
+
 # Expose the port your app listens on (adjust if needed)
 EXPOSE 3000
 
