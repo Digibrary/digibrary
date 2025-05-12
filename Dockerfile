@@ -1,5 +1,5 @@
 # Use official Node.js image
-FROM node:latest
+FROM node:24
 
 # Create a non-root user and group
 RUN groupadd -r appuser && useradd -r -g appuser -m appuser
